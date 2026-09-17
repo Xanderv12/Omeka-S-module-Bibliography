@@ -226,11 +226,9 @@ class RdfToCsl extends AbstractHelper
         if (!$date) {
             return null;
         }
-
-        
-        //----------Temp fix----------
         $value = (string) $date->value();
         
+        //----------Temp fix----------
         //If date entered only contains a 4 digit year, return the 4 digit year without modifiying it 
         if (preg_match('/^\d{4}$/', $value)) {
         return (object) ['date-parts' => [[$value]]];
@@ -239,11 +237,11 @@ class RdfToCsl extends AbstractHelper
 
         
         if ($date->type() === 'numeric:timestamp') {
-            $date = str_replace('-', '', substr((string) $date->value() . '-00-00', 0, 10));
+            $date = str_replace('-', '', substr(value() . '-00-00', 0, 10));
             return (object) ['date-parts' => [[$date]]];
         }
 
-        return (object) ['date-parts' => [[str_replace('-', '', substr((string) $date->value() . '-00-00', 0, 10))]]];
+        return (object) ['date-parts' => [[str_replace('-', '', substr(value() . '-00-00', 0, 10))]]];
     }
 
     /**
