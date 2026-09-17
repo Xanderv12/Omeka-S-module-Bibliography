@@ -227,6 +227,17 @@ class RdfToCsl extends AbstractHelper
             return null;
         }
 
+        
+        //----------Temp fix----------
+        $value = (string) $date->value();
+        
+        //If date entered only contains a 4 digit year, return the 4 digit year without modifiying it 
+        if (preg_match('/^\d{4}$/', $value)) {
+        return (object) ['date-parts' => [[$value]]];
+        }
+        //-----------------------------
+
+        
         if ($date->type() === 'numeric:timestamp') {
             $date = str_replace('-', '', substr((string) $date->value() . '-00-00', 0, 10));
             return (object) ['date-parts' => [[$date]]];
