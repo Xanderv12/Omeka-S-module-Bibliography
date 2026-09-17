@@ -237,11 +237,11 @@ class RdfToCsl extends AbstractHelper
 
         
         if ($date->type() === 'numeric:timestamp') {
-            $date = str_replace('-', '', substr(value() . '-00-00', 0, 10));
-            return (object) ['date-parts' => [[$date]]];
+            $value = str_replace('-', '', substr($value . '-00-00', 0, 10));
+            return (object) ['date-parts' => [[$value]]];
         }
 
-        return (object) ['date-parts' => [[str_replace('-', '', substr(value() . '-00-00', 0, 10))]]];
+        return (object) ['date-parts' => [[str_replace('-', '', substr($value . '-00-00', 0, 10))]]];
     }
 
     /**
